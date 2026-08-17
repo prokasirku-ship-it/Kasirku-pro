@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kasirku Pro - Majoo POS Clone</title>
+  <title>Kasirku Pro - Sistem POS Kasir Lengkap</title>
   
-  <!-- Font & Icon Google -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -26,13 +25,10 @@
 
     .app-layout { display: flex; height: 100vh; }
 
-    /* --- SIDEBAR MAJOO --- */
+    /* SIDEBAR */
     .sidebar {
-      width: 230px;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      padding: 20px 15px; justify-content: space-between;
+      width: 230px; background: var(--surface); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; padding: 20px 15px; justify-content: space-between;
     }
     .brand { display: flex; align-items: center; gap: 12px; }
     .brand-logo {
@@ -47,106 +43,88 @@
     .nav-link {
       display: flex; align-items: center; gap: 12px; padding: 12px 16px;
       color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 0.9rem;
-      border-radius: 10px; transition: all 0.2s;
+      border-radius: 10px; transition: all 0.2s; cursor: pointer;
     }
     .nav-link:hover, .nav-link.active { background: #e6f8f0; color: var(--primary); }
 
-    .user-profile {
-      display: flex; align-items: center; gap: 10px; padding: 12px;
-      background: var(--bg-app); border-radius: 12px;
-    }
-    .avatar {
-      width: 36px; height: 36px; background: #cbd5e1; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; color: white;
-    }
+    /* MAIN VIEW SWITCHER */
+    .view-section { flex: 1; display: none; flex-direction: column; padding: 20px; overflow-y: auto; gap: 20px; }
+    .view-section.active { display: flex; }
 
-    /* --- CATALOG & POS MAIN --- */
-    .pos-main { flex: 1; display: flex; flex-direction: column; padding: 20px; overflow-y: auto; gap: 20px; }
-    
+    /* POS VIEW */
+    .pos-container { display: flex; flex: 1; gap: 20px; height: 100%; overflow: hidden; }
+    .pos-main { flex: 1; display: flex; flex-direction: column; gap: 15px; overflow-y: auto; }
+
     .search-bar {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 12px 18px; display: flex; align-items: center; gap: 12px;
     }
     .search-bar input { border: none; outline: none; width: 100%; font-size: 0.95rem; }
-    .search-bar i { color: var(--text-sub); }
 
     .cat-wrapper { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
     .cat-btn {
       border: 1px solid var(--border); background: var(--surface);
       padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;
-      color: var(--text-sub); cursor: pointer; white-space: nowrap; transition: 0.2s;
+      color: var(--text-sub); cursor: pointer; white-space: nowrap;
     }
     .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-    .grid-products {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px;
-    }
+    .grid-products { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
     .card-product {
       background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
       padding: 12px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column;
     }
-    .card-product:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
-    .card-product img { width: 100%; height: 110px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
-    .product-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; line-height: 1.2; }
+    .card-product:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
+    .product-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
     .product-price { color: var(--primary); font-weight: 800; font-size: 0.95rem; margin-top: auto; }
 
-    /* --- CART PANEL RIGHT --- */
+    /* CART PANEL */
     .cart-panel {
-      width: 380px; background: var(--surface); border-left: 1px solid var(--border);
-      display: flex; flex-direction: column;
+      width: 360px; background: var(--surface); border-left: 1px solid var(--border);
+      display: flex; flex-direction: column; border-radius: 14px;
     }
-    .cart-header {
-      padding: 20px; border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .cart-header h3 { font-size: 1.05rem; font-weight: 800; }
-    .btn-clear { background: none; border: none; color: var(--danger); font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .cart-header { padding: 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+    .cart-list { flex: 1; padding: 18px; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .btn-qty { width: 26px; height: 26px; border: 1px solid var(--border); background: white; border-radius: 6px; cursor: pointer; font-weight: 700; }
 
-    .cart-list { flex: 1; padding: 20px; overflow-y: auto; }
-    .empty-cart { text-align: center; color: var(--text-sub); margin-top: 100px; }
-    .empty-cart i { font-size: 3.5rem; margin-bottom: 12px; opacity: 0.5; }
-
-    .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .item-info { display: flex; flex-direction: column; gap: 2px; }
-    .item-title { font-weight: 700; font-size: 0.88rem; }
-    .item-price { color: var(--primary); font-weight: 700; font-size: 0.82rem; }
-    .qty-controls { display: flex; align-items: center; gap: 8px; }
-    .btn-qty {
-      width: 28px; height: 28px; border: 1px solid var(--border); background: white;
-      border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    }
-
-    .cart-summary { padding: 20px; border-top: 1px solid var(--border); background: #f8fafc; }
+    .cart-summary { padding: 18px; border-top: 1px solid var(--border); background: #f8fafc; border-radius: 0 0 14px 14px; }
     .summary-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem; color: var(--text-sub); }
-    .summary-item.total { font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-top: 10px; }
+    .summary-item.total { font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-top: 8px; }
 
-    .payment-methods { display: flex; gap: 8px; margin: 15px 0; }
+    .payment-methods { display: flex; gap: 8px; margin: 12px 0; }
     .pay-opt {
       flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 8px;
-      background: white; text-align: center; font-size: 0.8rem; font-weight: 700;
-      cursor: pointer; color: var(--text-sub);
+      background: white; text-align: center; font-size: 0.8rem; font-weight: 700; cursor: pointer;
     }
     .pay-opt.active { border-color: var(--primary); background: #e6f8f0; color: var(--primary); }
 
     .btn-checkout {
-      width: 100%; padding: 15px; background: var(--primary); color: white;
-      border: none; border-radius: 12px; font-weight: 800; font-size: 1rem;
-      cursor: pointer; transition: 0.2s;
+      width: 100%; padding: 14px; background: var(--primary); color: white;
+      border: none; border-radius: 10px; font-weight: 800; cursor: pointer;
     }
-    .btn-checkout:hover { background: var(--primary-hover); }
 
-    /* RESPONSIVE FOR MOBILE */
-    @media (max-width: 900px) {
-      .app-layout { flex-direction: column; height: auto; overflow: auto; }
-      .sidebar { width: 100%; height: auto; }
-      .cart-panel { width: 100%; border-left: none; border-top: 1px solid var(--border); }
-    }
+    /* KELOLA PRODUK VIEW */
+    .card-box { background: var(--surface); padding: 20px; border-radius: 14px; border: 1px solid var(--border); }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .form-group input, .form-group select { padding: 10px; border: 1px solid var(--border); border-radius: 8px; outline: none; }
+    .btn-primary { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { padding: 12px; border-bottom: 1px solid var(--border); text-align: left; font-size: 0.9rem; }
+    th { background: #f8fafc; }
+
+    /* LAPORAN VIEW */
+    .stat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+    .stat-card { background: var(--surface); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+    .stat-card h4 { color: var(--text-sub); font-size: 0.85rem; margin-bottom: 8px; }
+    .stat-card p { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
   </style>
 </head>
 <body>
 
   <div class="app-layout">
-    <!-- SIDEBAR NAVIGASI -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div>
         <div class="brand">
@@ -154,140 +132,197 @@
           <div class="brand-title">Kasirku<span>PRO</span></div>
         </div>
         <nav class="nav-list">
-          <a href="#" class="nav-link active"><i class="fa-solid fa-store"></i> Kasir / POS</a>
-          <a href="#" class="nav-link"><i class="fa-solid fa-box-archive"></i> Produk</a>
-          <a href="#" class="nav-link"><i class="fa-solid fa-receipt"></i> Transaksi</a>
-          <a href="#" class="nav-link"><i class="fa-solid fa-chart-pie"></i> Laporan</a>
+          <div class="nav-link active" onclick="switchView('posView', this)"><i class="fa-solid fa-store"></i> Kasir / POS</div>
+          <div class="nav-link" onclick="switchView('productView', this)"><i class="fa-solid fa-box-archive"></i> Kelola Produk</div>
+          <div class="nav-link" onclick="switchView('reportView', this)"><i class="fa-solid fa-chart-pie"></i> Laporan</div>
         </nav>
       </div>
-      <div class="user-profile">
-        <div class="avatar"><i class="fa-solid fa-user-gear"></i></div>
-        <div>
-          <div style="font-weight:700; font-size:0.85rem;">Kasir Store</div>
-          <div style="font-size:0.75rem; color:var(--text-sub);">Cabang Utama</div>
-        </div>
-      </div>
     </aside>
 
-    <!-- KATALOG PRODUK -->
-    <main class="pos-main">
-      <div class="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" placeholder="Cari produk atau menu kasir..." onkeyup="filterProducts()">
+    <!-- 1. HALAMAN KASIR / POS -->
+    <section id="posView" class="view-section active">
+      <div class="pos-container">
+        <div class="pos-main">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Cari nama produk..." onkeyup="filterProducts()">
+          </div>
+
+          <div class="cat-wrapper">
+            <button class="cat-btn active" onclick="setCategory('all', this)">Semua Menu</button>
+            <button class="cat-btn" onclick="setCategory('makanan', this)">Makanan</button>
+            <button class="cat-btn" onclick="setCategory('minuman', this)">Minuman</button>
+            <button class="cat-btn" onclick="setCategory('snack', this)">Cemilan</button>
+          </div>
+
+          <div class="grid-products" id="posProductList"></div>
+        </div>
+
+        <div class="cart-panel">
+          <div class="cart-header">
+            <h3><i class="fa-solid fa-cart-shopping"></i> Keranjang</h3>
+            <button style="background:none; border:none; color:var(--danger); cursor:pointer;" onclick="resetCart()">Reset</button>
+          </div>
+          <div class="cart-list" id="cartItems"></div>
+          <div class="cart-summary">
+            <div class="summary-item"><span>Subtotal</span><span id="txtSubtotal">Rp 0</span></div>
+            <div class="summary-item"><span>Pajak (10%)</span><span id="txtTax">Rp 0</span></div>
+            <div class="summary-item total"><span>Total Bayar</span><span id="txtTotal">Rp 0</span></div>
+
+            <div class="payment-methods">
+              <div class="pay-opt active" onclick="setPayment('Cash', this)">Tunai</div>
+              <div class="pay-opt" onclick="setPayment('QRIS', this)">QRIS</div>
+              <div class="pay-opt" onclick="setPayment('Debit', this)">Debit</div>
+            </div>
+
+            <button class="btn-checkout" onclick="processCheckout()"><i class="fa-solid fa-print"></i> Proses Transaksi</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HALAMAN KELOLA PRODUK -->
+    <section id="productView" class="view-section">
+      <h2>Kelola Produk</h2>
+      <div class="card-box">
+        <h3>Tambah Produk Baru</h3>
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:15px;">
+          <div class="form-group">
+            <label>Nama Produk</label>
+            <input type="text" id="newProdName" placeholder="Contoh: Es Teh Manis">
+          </div>
+          <div class="form-group">
+            <label>Harga (Rp)</label>
+            <input type="number" id="newProdPrice" placeholder="5000">
+          </div>
+          <div class="form-group">
+            <label>Kategori</label>
+            <select id="newProdCat">
+              <option value="makanan">Makanan</option>
+              <option value="minuman">Minuman</option>
+              <option value="snack">Cemilan</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="addNewProduct()"><i class="fa-solid fa-plus"></i> Simpan Produk</button>
       </div>
 
-      <div class="cat-wrapper">
-        <button class="cat-btn active" onclick="setCategory('all', this)">Semua Menu</button>
-        <button class="cat-btn" onclick="setCategory('makanan', this)">Makanan</button>
-        <button class="cat-btn" onclick="setCategory('minuman', this)">Minuman</button>
-        <button class="cat-btn" onclick="setCategory('snack', this)">Cemilan</button>
+      <div class="card-box">
+        <h3>Daftar Produk Terdaftar</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nama Produk</th>
+              <th>Kategori</th>
+              <th>Harga</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tableProductBody"></tbody>
+        </table>
       </div>
+    </section>
 
-      <div class="grid-products" id="productContainer"></div>
-    </main>
-
-    <!-- DETAIL KERANJANG -->
-    <aside class="cart-panel">
-      <div class="cart-header">
-        <h3><i class="fa-solid fa-cart-shopping"></i> Pesanan Baru</h3>
-        <button class="btn-clear" onclick="resetCart()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
-      </div>
-
-      <div class="cart-list" id="cartContainer">
-        <div class="empty-cart">
-          <i class="fa-solid fa-basket-shopping"></i>
-          <p>Belum ada menu dipilih</p>
+    <!-- 3. HALAMAN LAPORAN -->
+    <section id="reportView" class="view-section">
+      <h2>Laporan Penjualan Real-time</h2>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <h4>Total Omset</h4>
+          <p id="statOmset">Rp 0</p>
+        </div>
+        <div class="stat-card">
+          <h4>Total Transaksi</h4>
+          <p id="statCount">0</p>
+        </div>
+        <div class="stat-card">
+          <h4>Item Terjual</h4>
+          <p id="statItems">0 pcs</p>
         </div>
       </div>
 
-      <div class="cart-summary">
-        <div class="summary-item"><span>Subtotal</span><span id="txtSubtotal">Rp 0</span></div>
-        <div class="summary-item"><span>Pajak Resto (10%)</span><span id="txtTax">Rp 0</span></div>
-        <div class="summary-item total"><span>Total Bayar</span><span id="txtTotal">Rp 0</span></div>
-
-        <div style="margin-top:12px; font-weight:700; font-size:0.8rem; color:var(--text-sub);">Metode Pembayaran:</div>
-        <div class="payment-methods">
-          <div class="pay-opt active" onclick="setPayment('Cash', this)"><i class="fa-solid fa-money-bill-wave"></i> Tunai</div>
-          <div class="pay-opt" onclick="setPayment('QRIS', this)"><i class="fa-solid fa-qrcode"></i> QRIS</div>
-          <div class="pay-opt" onclick="setPayment('Debit', this)"><i class="fa-solid fa-credit-card"></i> Debit</div>
-        </div>
-
-        <button class="btn-checkout" onclick="processPayment()"><i class="fa-solid fa-print"></i> Proses & Cetak Struk</button>
+      <div class="card-box">
+        <h3>Riwayat Transaksi</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Metode</th>
+              <th>Detail Item</th>
+              <th>Total Pembayaran</th>
+            </tr>
+          </thead>
+          <tbody id="tableReportBody"></tbody>
+        </table>
       </div>
-    </aside>
+    </section>
   </div>
 
   <script>
-    // DATA PRODUK DUMMY ALA MAJOO
-    const products = [
-      { id: 1, name: 'Kopi Susu Aren Pro', price: 18000, category: 'minuman', img: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=300' },
-      { id: 2, name: 'Ice Americano Blend', price: 15000, category: 'minuman', img: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=300' },
-      { id: 3, name: 'Nasi Goreng Spesial', price: 25000, category: 'makanan', img: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=300' },
-      { id: 4, name: 'Roti Bakar Keju', price: 16000, category: 'snack', img: 'https://images.unsplash.com/photo-1584776296944-ab6fb57b0bdd?w=300' },
-      { id: 5, name: 'French Fries Crispy', price: 12000, category: 'snack', img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300' },
-      { id: 6, name: 'Matcha Green Tea', price: 22000, category: 'minuman', img: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=300' }
+    // DATABASE STATE
+    let products = [
+      { id: 1, name: 'Kopi Susu Aren Pro', price: 18000, category: 'minuman' },
+      { id: 2, name: 'Nasi Goreng Spesial', price: 25000, category: 'makanan' },
+      { id: 3, name: 'Roti Bakar Keju', price: 16000, category: 'snack' }
     ];
 
     let cart = [];
+    let transactions = [];
     let currentCategory = 'all';
     let selectedPayment = 'Cash';
 
-    // RENDER PRODUK S
-    function renderProducts(items) {
-      const container = document.getElementById('productContainer');
-      container.innerHTML = '';
+    // NAVIGASI VIEW
+    function switchView(viewId, el) {
+      document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+      
+      document.getElementById(viewId).classList.add('active');
+      el.classList.add('active');
 
+      if (viewId === 'productView') renderProductTable();
+      if (viewId === 'reportView') renderReportView();
+    }
+
+    // POS LOGIC
+    function renderPOSProducts(items) {
+      const list = document.getElementById('posProductList');
+      list.innerHTML = '';
       items.forEach(p => {
         const card = document.createElement('div');
         card.className = 'card-product';
         card.onclick = () => addToCart(p.id);
         card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}">
           <div class="product-name">${p.name}</div>
+          <div style="font-size:0.75rem; color:var(--text-sub); text-transform:capitalize;">${p.category}</div>
           <div class="product-price">Rp ${p.price.toLocaleString('id-ID')}</div>
         `;
-        container.appendChild(card);
+        list.appendChild(card);
       });
     }
 
-    // KERANJANG LOGIC
     function addToCart(id) {
-      const item = products.find(p => p.id === id);
-      const inCart = cart.find(c => c.id === id);
-
-      if (inCart) {
-        inCart.qty += 1;
-      } else {
-        cart.push({ ...item, qty: 1 });
-      }
+      const p = products.find(prod => prod.id === id);
+      const inCart = cart.find(item => item.id === id);
+      if (inCart) { inCart.qty += 1; } 
+      else { cart.push({ ...p, qty: 1 }); }
       updateCartView();
     }
 
     function changeQty(id, delta) {
       const item = cart.find(c => c.id === id);
       if(!item) return;
-
       item.qty += delta;
-      if (item.qty <= 0) {
-        cart = cart.filter(c => c.id !== id);
-      }
+      if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
       updateCartView();
     }
 
-    function resetCart() {
-      cart = [];
-      updateCartView();
-    }
+    function resetCart() { cart = []; updateCartView(); }
 
     function updateCartView() {
-      const container = document.getElementById('cartContainer');
-      
+      const container = document.getElementById('cartItems');
       if (cart.length === 0) {
-        container.innerHTML = `
-          <div class="empty-cart">
-            <i class="fa-solid fa-basket-shopping"></i>
-            <p>Belum ada menu dipilih</p>
-          </div>`;
+        container.innerHTML = '<p style="text-align:center; color:var(--text-sub); margin-top:50px;">Keranjang kosong</p>';
         document.getElementById('txtSubtotal').innerText = 'Rp 0';
         document.getElementById('txtTax').innerText = 'Rp 0';
         document.getElementById('txtTotal').innerText = 'Rp 0';
@@ -296,21 +331,18 @@
 
       container.innerHTML = '';
       let subtotal = 0;
-
       cart.forEach(item => {
-        const itemTotal = item.price * item.qty;
-        subtotal += itemTotal;
-
+        subtotal += item.price * item.qty;
         const el = document.createElement('div');
         el.className = 'cart-item';
         el.innerHTML = `
-          <div class="item-info">
-            <div class="item-title">${item.name}</div>
-            <div class="item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+          <div>
+            <div style="font-weight:700; font-size:0.85rem;">${item.name}</div>
+            <div style="color:var(--primary); font-size:0.8rem; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</div>
           </div>
-          <div class="qty-controls">
+          <div style="display:flex; align-items:center; gap:6px;">
             <button class="btn-qty" onclick="changeQty(${item.id}, -1)">-</button>
-            <span style="font-weight:700; font-size:0.85rem;">${item.qty}</span>
+            <span style="font-weight:700;">${item.qty}</span>
             <button class="btn-qty" onclick="changeQty(${item.id}, 1)">+</button>
           </div>
         `;
@@ -319,45 +351,113 @@
 
       const tax = subtotal * 0.1;
       const total = subtotal + tax;
-
       document.getElementById('txtSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
       document.getElementById('txtTax').innerText = `Rp ${tax.toLocaleString('id-ID')}`;
       document.getElementById('txtTotal').innerText = `Rp ${total.toLocaleString('id-ID')}`;
     }
 
-    // FILTER & SEARCH
     function setCategory(cat, btn) {
       currentCategory = cat;
       document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
-      renderProducts(filtered);
+      renderPOSProducts(filtered);
     }
 
     function filterProducts() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-      renderProducts(filtered);
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      renderPOSProducts(products.filter(p => p.name.toLowerCase().includes(q)));
     }
 
-    function setPayment(method, el) {
-      selectedPayment = method;
+    function setPayment(m, el) {
+      selectedPayment = m;
       document.querySelectorAll('.pay-opt').forEach(opt => opt.classList.remove('active'));
       el.classList.add('active');
     }
 
-    function processPayment() {
-      if (cart.length === 0) {
-        alert('Pilih produk terlebih dahulu!');
-        return;
-      }
-      alert(`Transaksi Sukses!\nMetode Pembayaran: ${selectedPayment}\nTerima kasih telah menggunakan Kasirku Pro.`);
+    function processCheckout() {
+      if(cart.length === 0) return alert('Pilih produk dulu!');
+      
+      const sub = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const total = sub * 1.1;
+      const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
+
+      transactions.push({
+        time: new Date().toLocaleTimeString('id-ID'),
+        method: selectedPayment,
+        details: cart.map(i => `${i.name} (${i.qty})`).join(', '),
+        total: total,
+        qty: totalQty
+      });
+
+      alert('Transaksi Berhasil Disimpan!');
       resetCart();
     }
 
+    // KELOLA PRODUK LOGIC
+    function renderProductTable() {
+      const tbody = document.getElementById('tableProductBody');
+      tbody.innerHTML = '';
+      products.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>#${p.id}</td>
+          <td><strong>${p.name}</strong></td>
+          <td style="text-transform:capitalize;">${p.category}</td>
+          <td>Rp ${p.price.toLocaleString('id-ID')}</td>
+          <td><button style="background:var(--danger); color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;" onclick="deleteProduct(${p.id})">Hapus</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addNewProduct() {
+      const name = document.getElementById('newProdName').value;
+      const price = parseFloat(document.getElementById('newProdPrice').value);
+      const cat = document.getElementById('newProdCat').value;
+
+      if(!name || isNaN(price)) return alert('Isi nama dan harga dengan benar!');
+
+      products.push({ id: Date.now(), name: name, price: price, category: cat });
+      document.getElementById('newProdName').value = '';
+      document.getElementById('newProdPrice').value = '';
+      
+      renderProductTable();
+      renderPOSProducts(products);
+      alert('Produk Berhasil Ditambahkan!');
+    }
+
+    function deleteProduct(id) {
+      products = products.filter(p => p.id !== id);
+      renderProductTable();
+      renderPOSProducts(products);
+    }
+
+    // LAPORAN LOGIC
+    function renderReportView() {
+      const omset = transactions.reduce((acc, t) => acc + t.total, 0);
+      const itemsCount = transactions.reduce((acc, t) => acc + t.qty, 0);
+
+      document.getElementById('statOmset').innerText = `Rp ${omset.toLocaleString('id-ID')}`;
+      document.getElementById('statCount').innerText = transactions.length;
+      document.getElementById('statItems').innerText = `${itemsCount} pcs`;
+
+      const tbody = document.getElementById('tableReportBody');
+      tbody.innerHTML = '';
+      transactions.forEach(t => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${t.time}</td>
+          <td><span style="background:#e6f8f0; color:var(--primary); padding:4px 8px; border-radius:6px; font-weight:700;">${t.method}</span></td>
+          <td>${t.details}</td>
+          <td><strong>Rp ${t.total.toLocaleString('id-ID')}</strong></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
     // INIT
-    renderProducts(products);
+    renderPOSProducts(products);
   </script>
 </body>
 </html>
