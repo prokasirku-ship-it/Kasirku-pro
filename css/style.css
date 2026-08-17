@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #10b981;
+  color: white;
+  padding: 15px 20px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #d1fae5;
+  font-weight: 300;
+}
+
+.pos-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 60px);
+}
+
+/* Area Produk */
+.products-section {
+  flex: 2;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cat-btn {
+  padding: 8px 16px;
+  border: none;
+  background: #e5e7eb;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cat-btn.active {
+  background: #10b981;
+  color: white;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.product-card:active {
+  transform: scale(0.98);
+}
+
+.product-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.product-price {
+  color: #10b981;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Area Keranjang */
+.cart-section {
+  flex: 1;
+  background: white;
+  border-left: 1px solid #e5e7eb;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 15px;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #9ca3af;
+  margin-top: 50px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.cart-summary {
+  border-top: 2px solid #e5e7eb;
+  padding-top: 15px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary-row.total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 14px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+  .pos-container {
+    flex-direction: column;
+    height: auto;
+  }
+}

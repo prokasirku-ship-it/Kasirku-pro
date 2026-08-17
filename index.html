@@ -4,32 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Judul Halaman -->
   <title>Kasirku Pro - Aplikasi Kasir Online POS</title>
-  <meta name="description" content="Aplikasi kasir online POS serba digital dan otomatis untuk pengelolaan toko dan multi cabang.">
+  <meta name="description" content="Aplikasi kasir online POS serba digital dan otomatis.">
 
-  <!-- Open Graph Meta Tags (Untuk Tampilan Preview Otomatis di WhatsApp/Medsos) -->
+  <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kasirku Pro - Kasir Online POS">
-  <meta property="og:description" content="Proses Transaksi Serba Digital dan Otomatis. Solusi Kasir Pintar & Cerdas.">
+  <meta property="og:description" content="Proses Transaksi Serba Digital dan Otomatis.">
   <meta property="og:image" content="https://raw.githubusercontent.com/prokasirku-ship-it/Kasirku-pro/main/img/banner.jpg">
   <meta property="og:url" content="https://prokasirku-ship-it.github.io/Kasirku-pro/">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kasirku Pro - Kasir Online POS">
-  <meta name="twitter:description" content="Proses Transaksi Serba Digital dan Otomatis. Solusi Kasir Pintar & Cerdas.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/prokasirku-ship-it/Kasirku-pro/main/img/banner.jpg">
-
-  <!-- Hubungkan CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <h1>Selamat Datang di Kasirku Pro</h1>
-  <p>Aplikasi Kasir Online POS - Proses Transaksi Serba Digital dan Otomatis.</p>
+  <!-- Navbar / Header -->
+  <header class="navbar">
+    <div class="logo">Kasirku<span>Pro</span></div>
+    <div class="user-profile">Kasir: <strong>Admin Store</strong></div>
+  </header>
 
-  <!-- Hubungkan JavaScript -->
+  <!-- Container Utama -->
+  <main class="pos-container">
+    
+    <!-- Bagian Kiri: Area Produk -->
+    <section class="products-section">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Cari produk..." onkeyup="searchProduct()">
+      </div>
+
+      <div class="categories">
+        <button class="cat-btn active">Semua</button>
+        <button class="cat-btn">Makanan</button>
+        <button class="cat-btn">Minuman</button>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Produk akan di-render melalui JavaScript -->
+      </div>
+    </section>
+
+    <!-- Bagian Kanan: Keranjang & Pembayaran -->
+    <section class="cart-section">
+      <h2>Keranjang Transaksi</h2>
+      
+      <div class="cart-items" id="cartItems">
+        <p class="empty-msg">Keranjang masih kosong</p>
+      </div>
+
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotalText">Rp 0</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="totalText">Rp 0</span>
+        </div>
+        <button class="btn-checkout" onclick="checkout()">Bayar Sekarang</button>
+      </div>
+    </section>
+
+  </main>
+
   <script src="js/app.js"></script>
 </body>
 </html>
